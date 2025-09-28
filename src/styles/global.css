@@ -1,0 +1,20 @@
+/* Main CSS entry point - Imports all modular styles */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+/* All @import statements must come first */
+@import 'tailwindcss' important;
+@import '@/styles/base/reset.css';
+@import '@/styles/base/scrollbar.css';
+@import '@/styles/utilities/transitions.css';
+@import '@/styles/utilities/helpers.css';
+
+/* Tailwind CSS base styles - Must come after @import statements */
+@tailwind utilities;
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  html {
+    font-family: 'Nunito', sans-serif;
+  }
+}

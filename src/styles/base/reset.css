@@ -1,0 +1,33 @@
+/* Base global styles */
+
+/* Ensure proper box-sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  @apply transition-colors duration-300 ease-in-out;
+}
+
+/* Remove default margin and padding */
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  @apply size-full bg-blue-50 dark:bg-gray-900;
+}
+
+/* Improve text rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button:not(:disabled) {
+  cursor: pointer;
+}
+
+/* Remove focus outline for mouse users */
+:focus:not(:focus-visible) {
+  outline: none;
+}
