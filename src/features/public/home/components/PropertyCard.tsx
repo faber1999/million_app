@@ -22,10 +22,10 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, onViewDetails }) 
 
   return (
     <motion.div
-      className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden group cursor-pointer"
+      className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm rounded-2xl shadow-luxury overflow-hidden group cursor-pointer border border-gray-200/50 dark:border-gray-700/50"
       whileHover={{
-        y: -8,
-        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
+        y: -12,
+        boxShadow: '0 35px 60px -12px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1)'
       }}
       transition={{
         type: 'spring',
@@ -65,14 +65,14 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, onViewDetails }) 
         )}
 
         <motion.div
-          className="absolute top-3 right-3 z-10"
+          className="absolute top-4 right-4 z-10"
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.2, type: 'spring', stiffness: 400 }}
         >
           <motion.span
-            className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium"
-            whileHover={{ scale: 1.1 }}
+            className="bg-luxury-gold text-white px-4 py-2 rounded-xl text-sm font-luxury font-medium shadow-luxury backdrop-blur-sm border border-white/20"
+            whileHover={{ scale: 1.05, y: -2 }}
             transition={{ duration: 0.2 }}
           >
             {formatPrice(property.price)}
@@ -80,7 +80,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, onViewDetails }) 
         </motion.div>
 
         <motion.div
-          className="absolute inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center"
+          className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent backdrop-blur-sm flex items-center justify-center"
           initial={{ opacity: 0, backdropFilter: 'blur(0px)' }}
           animate={{
             opacity: 0,
@@ -92,18 +92,24 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, onViewDetails }) 
           }}
           transition={{ duration: 0.3 }}
         >
-          <Eye className="h-6 w-6 text-gray-300" />
+          <motion.div
+            className="bg-white/20 backdrop-blur-md rounded-full p-3 border border-white/30"
+            whileHover={{ scale: 1.1, rotate: 10 }}
+            transition={{ duration: 0.2 }}
+          >
+            <Eye className="h-6 w-6 text-white" />
+          </motion.div>
         </motion.div>
       </div>
 
       <motion.div
-        className="p-6"
+        className="p-8"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.5 }}
       >
         <motion.h3
-          className="text-lg font-semibold text-gray-900 dark:text-white mb-2 line-clamp-1"
+          className="text-xl font-luxury text-gray-900 dark:text-white mb-3 line-clamp-1"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.4, duration: 0.5 }}
@@ -112,7 +118,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, onViewDetails }) 
         </motion.h3>
 
         <motion.div
-          className="space-y-2 mb-4"
+          className="space-y-3 mb-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 0.5 }}
@@ -123,10 +129,14 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, onViewDetails }) 
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.6, duration: 0.4 }}
           >
-            <motion.div whileHover={{ scale: 1.2, rotate: 10 }} transition={{ duration: 0.2 }}>
-              <MapPin className="h-4 w-4 mr-2 flex-shrink-0" />
+            <motion.div 
+              className="text-luxury-gold"
+              whileHover={{ scale: 1.2, rotate: 10 }} 
+              transition={{ duration: 0.2 }}
+            >
+              <MapPin className="h-5 w-5 mr-3 flex-shrink-0" />
             </motion.div>
-            <span className="text-sm line-clamp-2 truncate">{property.address}</span>
+            <span className="text-sm font-light line-clamp-2 truncate">{property.address}</span>
           </motion.div>
 
           <motion.div
@@ -135,22 +145,30 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, onViewDetails }) 
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.7, duration: 0.4 }}
           >
-            <motion.div whileHover={{ scale: 1.2, rotate: -10 }} transition={{ duration: 0.2 }}>
-              <User className="h-4 w-4 mr-2 flex-shrink-0" />
+            <motion.div 
+              className="text-luxury-gold"
+              whileHover={{ scale: 1.2, rotate: -10 }} 
+              transition={{ duration: 0.2 }}
+            >
+              <User className="h-5 w-5 mr-3 flex-shrink-0" />
             </motion.div>
-            <span className="text-sm">{property.ownerName}</span>
+            <span className="text-sm font-light">{property.ownerName}</span>
           </motion.div>
 
           <motion.div
-            className="flex items-center text-gray-600 dark:text-gray-300"
+            className="flex items-center text-gray-900 dark:text-white"
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.8, duration: 0.4 }}
           >
-            <motion.div whileHover={{ scale: 1.2, rotate: 15 }} transition={{ duration: 0.2 }}>
-              <DollarSign className="h-4 w-4 mr-2 flex-shrink-0" />
+            <motion.div 
+              className="text-luxury-gold"
+              whileHover={{ scale: 1.2, rotate: 15 }} 
+              transition={{ duration: 0.2 }}
+            >
+              <DollarSign className="h-5 w-5 mr-3 flex-shrink-0" />
             </motion.div>
-            <span className="text-sm font-medium">{formatPrice(property.price)}</span>
+            <span className="text-lg font-luxury font-medium">{formatPrice(property.price)}</span>
           </motion.div>
         </motion.div>
 
@@ -159,20 +177,21 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, onViewDetails }) 
             e.stopPropagation()
             onViewDetails(property)
           }}
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition-colors duration-200 font-medium flex items-center justify-center gap-2"
+          className="w-full bg-luxury-gold text-white py-4 px-6 rounded-xl font-luxury font-medium flex items-center justify-center gap-3 shadow-luxury hover:shadow-luxury-hover border border-amber-400/20"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9, duration: 0.4 }}
           whileHover={{
             scale: 1.02,
-            boxShadow: '0 10px 25px -12px rgba(59, 130, 246, 0.5)'
+            y: -2,
+            background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #92400e 100%)'
           }}
           whileTap={{ scale: 0.98 }}
         >
           <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.5 }}>
-            <Eye className="h-4 w-4" />
+            <Eye className="h-5 w-5" />
           </motion.div>
-          View Details
+          <span className="text-base">View Exclusive Details</span>
         </motion.button>
       </motion.div>
     </motion.div>

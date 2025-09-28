@@ -28,19 +28,24 @@ const PropertyFiltersComponent: React.FC<PropertyFiltersProps> = ({ filters, onA
 
   return (
     <motion.div
-      className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6"
+      className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-2xl shadow-luxury p-8 mb-8 border border-gray-200/50 dark:border-gray-700/50"
       initial={{ opacity: 0, y: 20, scale: 0.95 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
     >
-      <motion.h2
-        className="text-xl font-semibold mb-4 text-gray-900 dark:text-white"
+      <motion.div
+        className="text-center mb-8"
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.2, duration: 0.5 }}
       >
-        Search Properties
-      </motion.h2>
+        <div className="inline-block w-16 h-1 bg-luxury-gold rounded-full mb-4"></div>
+        <h2 className="text-2xl font-luxury text-gray-900 dark:text-white mb-2">Discover Your Perfect Property</h2>
+
+        <p className="text-gray-600 dark:text-gray-300 font-light">
+          Refine your search to find exceptional luxury properties
+        </p>
+      </motion.div>
 
       <motion.form
         onSubmit={handleSubmit}
@@ -50,7 +55,7 @@ const PropertyFiltersComponent: React.FC<PropertyFiltersProps> = ({ filters, onA
         transition={{ delay: 0.3, duration: 0.5 }}
       >
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.5 }}
@@ -61,16 +66,16 @@ const PropertyFiltersComponent: React.FC<PropertyFiltersProps> = ({ filters, onA
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5, duration: 0.4 }}
           >
-            <motion.div whileHover={{ scale: 1.1, rotate: 5 }} transition={{ duration: 0.2 }}>
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-            </motion.div>
+            <div className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10">
+              <Search className="text-luxury-gold h-5 w-5 transition-all duration-200 hover:scale-110" />
+            </div>
+
             <motion.input
               type="text"
               placeholder="Property name"
               value={localFilters.name || ''}
               onChange={(e) => handleInputChange('name', e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all duration-200"
-              whileFocus={{ scale: 1.02 }}
+              className="w-full pl-12 pr-4 py-4 border border-gray-200 dark:border-gray-600 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300 font-light placeholder-gray-400"
             />
           </motion.div>
 
@@ -80,16 +85,15 @@ const PropertyFiltersComponent: React.FC<PropertyFiltersProps> = ({ filters, onA
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.6, duration: 0.4 }}
           >
-            <motion.div whileHover={{ scale: 1.1, rotate: -5 }} transition={{ duration: 0.2 }}>
-              <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-            </motion.div>
+            <div className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10">
+              <MapPin className="text-luxury-gold h-5 w-5 transition-all duration-200 hover:scale-110" />
+            </div>
             <motion.input
               type="text"
               placeholder="Address"
               value={localFilters.address || ''}
               onChange={(e) => handleInputChange('address', e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all duration-200"
-              whileFocus={{ scale: 1.02 }}
+              className="w-full pl-12 pr-4 py-4 border border-gray-200 dark:border-gray-600 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300 font-light placeholder-gray-400"
             />
           </motion.div>
 
@@ -99,16 +103,15 @@ const PropertyFiltersComponent: React.FC<PropertyFiltersProps> = ({ filters, onA
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.7, duration: 0.4 }}
           >
-            <motion.div whileHover={{ scale: 1.1, rotate: 10 }} transition={{ duration: 0.2 }}>
-              <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-            </motion.div>
+            <div className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10">
+              <DollarSign className="text-luxury-gold h-5 w-5 transition-all duration-200 hover:scale-110" />
+            </div>
             <motion.input
               type="number"
               placeholder="Min price"
               value={localFilters.minPrice || ''}
               onChange={(e) => handleInputChange('minPrice', e.target.value ? Number(e.target.value) : '')}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all duration-200"
-              whileFocus={{ scale: 1.02 }}
+              className="w-full pl-12 pr-4 py-4 border border-gray-200 dark:border-gray-600 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300 font-light placeholder-gray-400"
             />
           </motion.div>
 
@@ -118,39 +121,40 @@ const PropertyFiltersComponent: React.FC<PropertyFiltersProps> = ({ filters, onA
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.8, duration: 0.4 }}
           >
-            <motion.div whileHover={{ scale: 1.1, rotate: -10 }} transition={{ duration: 0.2 }}>
-              <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-            </motion.div>
+            <div className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10">
+              <DollarSign className="text-luxury-gold h-5 w-5 transition-all duration-200 hover:scale-110" />
+            </div>
             <motion.input
               type="number"
               placeholder="Max price"
               value={localFilters.maxPrice || ''}
               onChange={(e) => handleInputChange('maxPrice', e.target.value ? Number(e.target.value) : '')}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all duration-200"
-              whileFocus={{ scale: 1.02 }}
+              className="w-full pl-12 pr-4 py-4 border border-gray-200 dark:border-gray-600 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300 font-light placeholder-gray-400"
             />
           </motion.div>
         </motion.div>
 
         <motion.div
-          className="flex gap-3 pt-2"
+          className="flex justify-center gap-4 pt-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9, duration: 0.5 }}
         >
           <motion.button
             type="submit"
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md transition-colors duration-200 font-medium"
+            className="bg-luxury-gold text-white px-10 py-4 rounded-xl font-luxury font-medium shadow-luxury hover:shadow-luxury-hover border border-amber-400/20 flex items-center gap-3"
             whileHover={{
-              scale: 1.05,
-              boxShadow: '0 10px 25px -12px rgba(59, 130, 246, 0.5)'
+              scale: 1.02,
+              y: -2,
+              background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #92400e 100%)'
             }}
-            whileTap={{ scale: 0.95 }}
+            whileTap={{ scale: 0.98 }}
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 1.0, duration: 0.4 }}
           >
-            Search
+            <Search className="h-5 w-5" />
+            <span className="text-base">Search Exclusive Properties</span>
           </motion.button>
 
           <AnimatePresence>
@@ -161,7 +165,7 @@ const PropertyFiltersComponent: React.FC<PropertyFiltersProps> = ({ filters, onA
                   setLocalFilters({})
                   onClearFilters()
                 }}
-                className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-md transition-colors duration-200 font-medium flex items-center gap-2"
+                className="bg-gray-500/80 hover:bg-gray-600/90 backdrop-blur-sm text-white px-8 py-4 rounded-xl font-luxury font-medium flex items-center gap-3 border border-gray-400/20 shadow-lg"
                 initial={{ opacity: 0, scale: 0, x: -20 }}
                 animate={{ opacity: 1, scale: 1, x: 0 }}
                 exit={{ opacity: 0, scale: 0, x: -20 }}
@@ -172,15 +176,16 @@ const PropertyFiltersComponent: React.FC<PropertyFiltersProps> = ({ filters, onA
                   duration: 0.3
                 }}
                 whileHover={{
-                  scale: 1.05,
+                  scale: 1.02,
+                  y: -2,
                   boxShadow: '0 10px 25px -12px rgba(75, 85, 99, 0.5)'
                 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <motion.div whileHover={{ rotate: 180 }} transition={{ duration: 0.3 }}>
-                  <X className="h-4 w-4" />
+                  <X className="h-5 w-5" />
                 </motion.div>
-                Clear
+                <span className="text-base">Reset Filters</span>
               </motion.button>
             )}
           </AnimatePresence>
