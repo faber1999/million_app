@@ -1,5 +1,4 @@
 import '@testing-library/jest-dom'
-import { cleanup } from '@testing-library/react'
 import React from 'react'
 import { afterAll, afterEach, beforeAll, vi } from 'vitest'
 import { server } from './mocks/server'
@@ -29,7 +28,6 @@ vi.mock('framer-motion', async () => {
 beforeAll(() => server.listen({ onUnhandledRequest: 'error' }))
 afterEach(() => {
   server.resetHandlers()
-  cleanup()
 })
 afterAll(() => server.close())
 

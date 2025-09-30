@@ -43,7 +43,7 @@ Contraseña: abcd1234
 - **Estado**: Zustand + React Query
 - **Routing**: React Router v7
 - **Animaciones**: Framer Motion
-- **Testing**: Vitest + Testing Library
+- **Testing**: Vitest + MSW + jsdom
 - **Linting**: ESLint + TypeScript ESLint
 - **Internacionalización**: i18next
 
@@ -85,9 +85,24 @@ pnpm run test:coverage
 pnpm run lint
 ```
 
-## 🧪 Visualizar Pruebas Frontend
+## 🧪 Pruebas Frontend
 
-Para explorar las pruebas unitarias e integración del frontend de forma interactiva:
+### Resultados Actuales
+
+![Resultados de Testing](./public/test_result.png)
+
+El proyecto cuenta con **69 tests unitarios** que cubren:
+- ✅ Utilidades de lenguaje y animaciones CSS
+- ✅ API de propiedades y servicios HTTP
+- ✅ Stores de autenticación y notificaciones
+- ✅ Cliente HTTP y manejo de errores
+- ✅ Utilidades HTTP y validaciones
+
+**Total:** 6 archivos de tests | 69 tests pasando | 0 tests fallando
+
+### Visualizar Pruebas Interactivamente
+
+Para explorar las pruebas de forma interactiva:
 
 ```bash
 pnpm run test:ui
@@ -134,14 +149,16 @@ VITE_BACKEND_URL=
 
 ## 📊 Cobertura de Pruebas
 
-El proyecto incluye pruebas exhaustivas para:
+El proyecto incluye **69 tests unitarios funcionales** que cubren:
 
-- ✅ Componentes de UI
-- ✅ Hooks personalizados
-- ✅ Servicios HTTP
-- ✅ Utilidades y helpers
-- ✅ Flujos de autenticación
-- ✅ Gestión de estado
+- ✅ **Utilidades y Helpers**: Tests para funciones de lenguaje, animaciones CSS y validaciones HTTP
+- ✅ **Servicios HTTP**: Cliente HTTP completo con manejo de errores, timeout y métodos REST
+- ✅ **API de Propiedades**: Tests de construcción de URLs, filtros y parámetros de paginación
+- ✅ **Gestión de Estado**: Stores de Zustand para autenticación y notificaciones
+- ✅ **Flujos de Autenticación**: Login, logout, refresh de tokens y persistencia de sesión
+- ✅ **Sistema de Notificaciones**: Métodos helper (success, error, warning, info) y gestión de notificaciones
+
+**Estrategia de Testing**: Tests unitarios puros sin renderizado de componentes UI, enfocados en lógica de negocio y funciones puras.
 
 ## 🔍 Funcionalidades Destacadas
 

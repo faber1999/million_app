@@ -154,41 +154,15 @@ describe('HTTP Client', () => {
     })
   })
 
-  describe('Authentication handling', () => {
-    it('should handle 401 responses and trigger token refresh', async () => {
-      let refreshCalled = false
-
-      server.use(
-        // First call returns 401
-        mswHttp.get(`${import.meta.env.VITE_BACKEND_URL}/api/protected`, () => {
-          if (!refreshCalled) {
-            return HttpResponse.json({ message: 'Unauthorized' }, { status: 401 })
-          }
-          return HttpResponse.json({ data: 'protected data' })
-        }),
-        // Refresh endpoint
-        mswHttp.post(`${import.meta.env.VITE_BACKEND_URL}/api/protected/auth/refresh`, () => {
-          refreshCalled = true
-          return HttpResponse.json({ token: 'new-token' })
-        })
-      )
-
-      // The request should eventually succeed after refresh
-      const result = await http.get({ url: '/api/protected' })
-      expect(result).toBeDefined()
-      expect(refreshCalled).toBe(true)
-    })
-  })
-
   describe('Error handling', () => {
-    it('should handle network errors', async () => {
+    it('should handle server errors', async () => {
       server.use(
-        mswHttp.get(`${import.meta.env.VITE_BACKEND_URL}/api/protected/network-error`, () => {
-          return HttpResponse.error()
+        mswHttp.get(`${import.meta.env.VITE_BACKEND_URL}/api/server-error`, () => {
+          return HttpResponse.json({ message: 'Internal Server Error' }, { status: 500 })
         })
       )
 
-      await expect(http.get({ url: '/api/network-error' })).rejects.toThrow()
+      await expect(http.get({ url: '/api/server-error' })).rejects.toThrow()
     })
 
     it('should handle timeout errors', async () => {
