@@ -30,18 +30,12 @@ const AppLayout = () => {
     }
   }
 
-  // Si no hay usuario, solo renderiza el contenido sin navbar
   if (!user) {
     return <Outlet />
   }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-gray-100 dark:from-slate-900 dark:via-gray-900 dark:to-slate-800">
-      {/* Background Pattern */}
-      <div
-        className={`absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23f1f5f9" fill-opacity="0.4"%3E%3Ccircle cx="7" cy="7" r="1"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] dark:bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23334155" fill-opacity="0.4"%3E%3Ccircle cx="7" cy="7" r="1"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]`}
-      ></div>
-
       {/* Navigation Header */}
       <motion.header
         className="relative z-10 bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl border-b border-gray-200/30 dark:border-gray-600/30 shadow-luxury"
@@ -105,9 +99,9 @@ const AppLayout = () => {
                 <p className="text-sm font-medium text-gray-900 dark:text-white">{user.name}</p>
                 <p className="text-xs text-gray-500 dark:text-gray-400">{user.email}</p>
               </div>
-              
+
               <div className="w-px h-8 bg-gray-300 dark:bg-gray-600 hidden md:block" />
-              
+
               <motion.button
                 onClick={handleLogout}
                 className="flex items-center gap-2 text-red-500 hover:text-red-600 transition-colors text-sm font-medium px-3 py-2 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20"
