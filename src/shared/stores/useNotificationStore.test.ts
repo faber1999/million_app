@@ -220,8 +220,6 @@ describe('useNotificationStore', () => {
     })
 
     it('should create error notification using error method', () => {
-      const id = useNotificationStore.getState().error('Error Title', 'Error message')
-
       const state = useNotificationStore.getState()
       expect(state.notifications).toHaveLength(1)
       expect(state.notifications[0].type).toBe('error')

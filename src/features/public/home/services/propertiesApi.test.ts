@@ -1,5 +1,3 @@
-import { server } from '@/test/mocks/server'
-import { HttpResponse, http as mswHttp } from 'msw'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import type { ApiResponse, Property, PropertyQueryParams } from '../types/property.types'
 import { fetchProperties } from './propertiesApi'
@@ -231,9 +229,7 @@ describe('propertiesApi', () => {
         totalCount: 1,
         page: 1,
         pageSize: 10,
-        totalPages: 1,
-        hasNextPage: false,
-        hasPreviousPage: false
+        totalPages: 1
       }
 
       mockGet.mockResolvedValueOnce(mockResponse)
