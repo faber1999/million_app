@@ -71,7 +71,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, onViewDetails }) 
           transition={{ delay: 0.2, type: 'spring', stiffness: 400 }}
         >
           <motion.span
-            className="bg-luxury-gold text-white px-4 py-2 rounded-xl text-sm font-luxury font-medium shadow-luxury backdrop-blur-sm border border-white/20"
+            className="bg-luxury-gold text-white px-4 py-2 rounded-xl text-sm font-semibold shadow-luxury backdrop-blur-sm border border-white/20"
             whileHover={{ scale: 1.05, y: -2 }}
             transition={{ duration: 0.2 }}
           >
@@ -168,7 +168,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, onViewDetails }) 
             >
               <DollarSign className="h-5 w-5 mr-3 flex-shrink-0" />
             </motion.div>
-            <span className="text-lg font-luxury font-medium">{formatPrice(property.price)}</span>
+            <span className="text-lg font-semibold">{formatPrice(property.price)}</span>
           </motion.div>
         </motion.div>
 

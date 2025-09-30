@@ -1,7 +1,10 @@
 import { LoadingSpinner } from '@/shared/components/loaders/LoadingSpinner'
+import { http } from '@/shared/lib/http'
+import { useAuthStore, type UserData } from '@/shared/stores/useAuthStore'
 import { AnimatePresence, motion } from 'framer-motion'
-import { AlertCircle, RefreshCw } from 'lucide-react'
+import { AlertCircle, LogIn, RefreshCw } from 'lucide-react'
 import { useState } from 'react'
+import LoginModal from './components/LoginModal'
 import PropertyCard from './components/PropertyCard'
 import PropertyDetailsModal from './components/PropertyDetailsModal'
 import PropertyFilters from './components/PropertyFilters'
@@ -23,8 +26,11 @@ const HomePage = () => {
     loadMore,
     refetch
   } = useHomePage()
+  const { user, login } = useAuthStore()
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
+  const [isLoggingIn, setIsLoggingIn] = useState(false)
 
   const handleViewDetails = (property: Property) => {
     setSelectedProperty(property)
@@ -34,6 +40,23 @@ const HomePage = () => {
   const handleCloseModal = () => {
     setIsModalOpen(false)
     setSelectedProperty(null)
+  }
+
+  const handleLogin = async (email: string, password: string) => {
+    setIsLoggingIn(true)
+    try {
+      const userData = await http.post<UserData>({
+        url: '/api/auth/login',
+        body: { email, password }
+      })
+
+      login(userData)
+      setIsLoginModalOpen(false)
+    } catch (error) {
+      console.error('Login error:', error)
+    } finally {
+      setIsLoggingIn(false)
+    }
   }
 
   if (error) {
@@ -101,6 +124,30 @@ const HomePage = () => {
       <div
         className={`absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23f1f5f9" fill-opacity="0.4"%3E%3Ccircle cx="7" cy="7" r="1"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] dark:bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23334155" fill-opacity="0.4"%3E%3Ccircle cx="7" cy="7" r="1"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]`}
       ></div>
+
+      {/* Action Buttons */}
+      <motion.div
+        className="absolute top-6 right-6 z-10 flex gap-3"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        {/* Login Button - Only show if not authenticated */}
+        {!user && (
+          <motion.button
+            onClick={() => setIsLoginModalOpen(true)}
+            className="bg-luxury-gold hover:bg-gradient-to-r hover:from-amber-600 hover:to-orange-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 text-sm font-medium shadow-lg hover:shadow-xl transition-all duration-300"
+            whileHover={{ scale: 1.02, y: -2 }}
+            whileTap={{ scale: 0.98 }}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+          >
+            <LogIn className="h-4 w-4" />
+            <span className="hidden sm:inline">Login</span>
+          </motion.button>
+        )}
+      </motion.div>
 
       <div className="relative container mx-auto px-6 py-12">
         <motion.div
@@ -355,6 +402,12 @@ const HomePage = () => {
         </AnimatePresence>
 
         <PropertyDetailsModal property={selectedProperty} isOpen={isModalOpen} onClose={handleCloseModal} />
+        <LoginModal
+          isOpen={isLoginModalOpen}
+          onClose={() => setIsLoginModalOpen(false)}
+          onLogin={handleLogin}
+          isLoading={isLoggingIn}
+        />
       </div>
     </motion.div>
   )

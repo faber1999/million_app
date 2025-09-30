@@ -1,6 +1,5 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { useMemo } from 'react'
-import { fetchMockProperties } from '../services/mockProperties'
 import { fetchProperties } from '../services/propertiesApi'
 import type { PropertyFilters } from '../types/property.types'
 
@@ -26,48 +25,6 @@ export const usePropertiesInfiniteQuery = (filters: PropertyFilters) => {
           return response
         }
 
-        // If API returns empty, use mock data (only for first page)
-        if (pageParam === 1) {
-          console.log('API returned empty data, using mock data for development')
-          const mockData = await fetchMockProperties()
-
-          // Filter mock data based on filters
-          let filteredMockData = mockData
-
-          if (filters.name) {
-            filteredMockData = filteredMockData.filter((property) =>
-              property.name.toLowerCase().includes(filters.name!.toLowerCase())
-            )
-          }
-
-          if (filters.address) {
-            filteredMockData = filteredMockData.filter((property) =>
-              property.address.toLowerCase().includes(filters.address!.toLowerCase())
-            )
-          }
-
-          if (filters.minPrice) {
-            filteredMockData = filteredMockData.filter((property) => property.price >= filters.minPrice!)
-          }
-
-          if (filters.maxPrice) {
-            filteredMockData = filteredMockData.filter((property) => property.price <= filters.maxPrice!)
-          }
-
-          // Simulate pagination with mock data
-          const startIndex = (pageParam - 1) * PAGE_SIZE
-          const endIndex = startIndex + PAGE_SIZE
-          const paginatedData = filteredMockData.slice(startIndex, endIndex)
-
-          return {
-            data: paginatedData,
-            totalCount: filteredMockData.length,
-            page: pageParam,
-            pageSize: PAGE_SIZE,
-            totalPages: Math.ceil(filteredMockData.length / PAGE_SIZE)
-          }
-        }
-
         // Return empty for subsequent pages when using mock data
         return {
           data: [],
@@ -80,12 +37,11 @@ export const usePropertiesInfiniteQuery = (filters: PropertyFilters) => {
         // API failed, use mock data only for first page
         if (pageParam === 1) {
           console.log('API failed, using mock data:', error)
-          const mockData = await fetchMockProperties()
           return {
-            data: mockData,
-            totalCount: mockData.length,
+            data: [],
+            totalCount: 0,
             page: 1,
-            pageSize: mockData.length,
+            pageSize: 0,
             totalPages: 1
           }
         }

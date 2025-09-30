@@ -1,9 +1,9 @@
 // Notification.tsx
 
+import type { NotificationData } from '@/shared/stores/useNotificationStore'
 import { t } from 'i18next'
 import { AlertCircle, AlertTriangle, CheckCircle, Info, X } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
-import type { NotificationData } from '../../stores/useNotificationStore'
 
 export interface NotificationProps extends NotificationData {
   onClose?: (id: string) => void
@@ -100,7 +100,10 @@ export const Notification: React.FC<NotificationProps> = ({
           {message && <p className={`mt-1 text-sm ${colors.message}`}>{message}</p>}
         </div>
         {closable && (
-          <button onClick={handleClose} className={`ml-4 inline-flex rounded-md focus:outline-none ${colors.icon} hover:opacity-75`}>
+          <button
+            onClick={handleClose}
+            className={`ml-4 inline-flex rounded-md focus:outline-none ${colors.icon} hover:opacity-75`}
+          >
             <span className="sr-only">{t('txt.close')}</span>
             <X className="h-4 w-4" />
           </button>

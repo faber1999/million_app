@@ -40,7 +40,7 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
         
         {/* Inner spinning ring */}
         <motion.div
-          className="absolute top-0 left-0 rounded-full h-16 w-16 border-4 border-transparent border-t-blue-600 dark:border-t-blue-400"
+          className="absolute top-0 left-0 rounded-full h-16 w-16 border-4 border-transparent border-t-amber-500"
           animate={{ rotate: 360 }}
           transition={{ 
             duration: 1, 
@@ -51,7 +51,7 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
         
         {/* Pulsing center dot */}
         <motion.div
-          className="absolute top-1/2 left-1/2 w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full transform -translate-x-1/2 -translate-y-1/2"
+          className="absolute top-1/2 left-1/2 w-2 h-2 bg-amber-500 rounded-full transform -translate-x-1/2 -translate-y-1/2"
           animate={{ 
             scale: [1, 1.5, 1],
             opacity: [0.5, 1, 0.5]

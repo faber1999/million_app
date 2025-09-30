@@ -42,10 +42,10 @@ export const validateHttpStatus = (httpStatusCode: number, response: AxiosRespon
 
     case httpStatusCode >= 400 && httpStatusCode < 500:
       title = `Client Error ${httpStatusCode}`
-      return
+      break
     case httpStatusCode >= 500 && httpStatusCode < 600:
       title = `Server Error ${httpStatusCode}`
-      return
+      break
     default:
       title = `Unknown Status Code ${httpStatusCode}`
   }

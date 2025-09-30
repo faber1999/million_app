@@ -1,7 +1,10 @@
 import { QueryClient } from '@tanstack/react-query'
+import { useI18nInstance } from './lib/i18n'
 import { router } from './router/routes'
 
 const useApp = () => {
+  const { i18nInstance } = useI18nInstance()
+
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -16,6 +19,7 @@ const useApp = () => {
 
   return {
     queryClient,
+    i18nInstance,
     router
   }
 }
